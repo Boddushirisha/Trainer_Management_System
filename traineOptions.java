@@ -19,13 +19,13 @@ public class traineOptions {
 	
 	public void admin() throws SQLException {
 		// TODO Auto-generated method stub
-		
+		String loginStatus=null;
 		Scanner ss=new Scanner(System.in);
 		System.out.println("Enter Username");
-		String username = ss.next();
+		String username = ss.nextLine();
 		
 		System.out.println("Enter password");
-		String password = ss.next();
+		String password = ss.nextLine();
 
 			Connection con =getMysqlConnection();
 			Statement stmt= con.createStatement();
@@ -43,7 +43,7 @@ public class traineOptions {
 						
 						System.out.println("1. Sign up as Trainer");
 						System.out.println("2. Sign up as Trainee");
-						System.out.println("3. Exit");
+						System.out.println("3. exit");
 						
 						
 						Scanner sc=new Scanner(System.in);
@@ -72,8 +72,8 @@ public class traineOptions {
 				System.out.println("Wrong Username And Password");
 				
 			}}
-		
-		
+			
+	
 		
 			}	
 	
@@ -81,7 +81,7 @@ public class traineOptions {
 	    
 	      try {
 			Connection conn =getMysqlConnection();
-			String createAcount = "insert into trainees(Id,phonenumber,username,password) values(?,?,?,?) ";
+			String createAcount = "insert into trainee(Id,contactno,username,password) values(?,?,?,?) ";
 			
 			PreparedStatement ps=  conn.prepareStatement(createAcount);
 			
@@ -128,7 +128,7 @@ public class traineOptions {
 		String password = ss.next();
 
 			Connection connn =getMysqlConnection();
-			String sql=  "select username,password from trainees where username= ?";
+			String sql=  "select username,password from trainee where username= ?";
 			PreparedStatement stmt;
 			try {
 				stmt = connn.prepareStatement(sql);
@@ -139,7 +139,7 @@ public class traineOptions {
 				 
 				if (rs.next()) {
 					
-					if (rs.getString(1).equals(usernames) && rs.getString(2) == password) {
+					if (rs.getString(1).equals(usernames) && rs.getString(2).equals(password)) {
 
 						System.out.println(" ******* WELCOME DEAR TRAINE :"+" "+ usernames + "******");
 					
@@ -165,7 +165,7 @@ public class traineOptions {
 		// TODO Auto-generated method stub
 		   try {
 				Connection conn =getMysqlConnection();
-				String createAcount = "insert into trainerDetails(trainer_id,trainer_name,trainer_password,course) values(?,?,?,?) ";
+				String createAcount = "insert into trainer(trainer_id,trainer_name,trainer_password,course) values(?,?,?,?) ";
 				
 				PreparedStatement ps=  conn.prepareStatement(createAcount);
 				
@@ -208,7 +208,7 @@ public class traineOptions {
 	String password = ss.next();
 
 		Connection connn =getMysqlConnection();
-		String sql=  "select username,password from trainers where username= ?";
+		String sql=  "select trainer_name,trainer_password from trainer where trainer_name= ?";
 		PreparedStatement stmt;
 		try {
 			stmt = connn.prepareStatement(sql);
@@ -219,7 +219,7 @@ public class traineOptions {
 			 
 			if (rs.next()) {
 				
-				if (rs.getString(1).equals(usernames) && rs.getString(2) == password) {
+				if (rs.getString(1).equals(usernames) && rs.getString(2).equals(password)){
 
 					System.out.println(" ******* WELCOME DEAR TRAINER :"+" "+ usernames + "******");
 					
@@ -228,7 +228,7 @@ public class traineOptions {
 			}
 			else{
 			
-				System.out.println("!!!!!!!!!!!!! Wrong Username And Password  !!!!!!!!!!!!!!" );
+				System.out.println("!!!!!!!!*** Wrong Username And Password *** !!!!!!!!" );
 				
 			}}
 			}
